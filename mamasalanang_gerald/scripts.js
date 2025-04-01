@@ -3,25 +3,28 @@ let commentTextarea = document.getElementById('goal_comment');
 let submitButton = document.getElementById('comment_button');
 let form = document.querySelector('.goal-comment-form');
 let commentContainer = document.querySelector('.existing-comments');
-let sortAscButton = document.getElementById('sort_asc');
-let sortDescButton = document.getElementById('sort_desc');
+let sortSelect = document.getElementById('sort_select');
 
 let commentTimestamps = new Map();
 
 nameInput.addEventListener('input', validateForm);
 commentTextarea.addEventListener('input', validateForm);
 form.addEventListener('submit', handleSubmit);
-sortAscButton.addEventListener('click', () => sortComments('asc'));
-sortDescButton.addEventListener('click', () => sortComments('desc'));
+sortSelect.addEventListener('change', sortComments);
 
 document.addEventListener('DOMContentLoaded', () => {
     validateForm();
     
     document.querySelectorAll('.teammate-comment').forEach((comment, index) => {
-        let timestamp = Date.now() - ((index + 1) * 24 * 60 * 60 * 1000);
+        let timestamp = Date.now();
         commentTimestamps.set(comment, timestamp);
         
         comment.dataset.timestamp = timestamp;
+
+        let timestampElement = document.createElement('div');
+        timestampElement.className = 'comment-timestamp';
+        timestampElement.textContent = formatTimestamp(timestamp);
+        comment.appendChild(timestampElement);
     });
 });
 
@@ -37,8 +40,17 @@ function handleSubmit(event) {
     let comment = commentTextarea.value.trim();
     let timestamp = Date.now();
     
-    let commentBox = createCommentElement(comment, name, timestamp);
-    commentContainer.appendChild(commentBox);
+    const commentBox = createCommentElement(comment, name, timestamp);
+    
+    let isDesc = sortSelect.value === 'desc';
+    let firstComment = isDesc ?
+          commentContainer.querySelector('.teammate-comment') : null;
+
+    if (firstComment) {
+        commentContainer.insertBefore(commentBox, firstComment);
+    } else {
+        commentContainer.appendChild(commentBox);
+    }
     
     form.reset();
     validateForm();
@@ -54,25 +66,38 @@ function createCommentElement(commentText, author, timestamp) {
         <span>- ${author}</span>
     `;
     
+    let timestampElement = document.createElement('div');
+    timestampElement.className = 'comment-timestamp';
+    timestampElement.textContent = formatTimestamp(timestamp);
+    commentBox.appendChild(timestampElement);
+    
     commentTimestamps.set(commentBox, timestamp);
     
     return commentBox;
 }
 
-function sortComments(order) {
-    let comments = Array.from(document.querySelectorAll('.teammate-comment'));
+function sortComments() {
+    let order = sortSelect.value === 'asc' ? 1 : -1;
     
-    comments.sort((a, b) => {
-        let timestampA = commentTimestamps.get(a) || 
-              parseInt(a.dataset.timestamp);
-        let timestampB = commentTimestamps.get(b) || 
-              parseInt(b.dataset.timestamp);
-              
-        return order === 'asc' ? timestampA - timestampB : 
-              timestampB - timestampA;
+    let comments = Array.from(document.querySelectorAll('.teammate-comment'))
+          .sort((a, b) => {
+              return (commentTimestamps.get(a)
+                    - commentTimestamps.get(b)) * order;
     });
     
+    let sortControls = commentContainer.querySelector('.sort-controls');
+    let commentsHeader = commentContainer.querySelector('h3');
+    commentContainer.innerHTML = '';
+    
+    commentContainer.appendChild(commentsHeader);
+    commentContainer.appendChild(sortControls);
+    
     comments.forEach(comment => commentContainer.appendChild(comment));
+}
+
+function formatTimestamp(timestamp) {
+    let date = new Date(timestamp);
+    return date.toLocaleString();
 }
 
 validateForm();
