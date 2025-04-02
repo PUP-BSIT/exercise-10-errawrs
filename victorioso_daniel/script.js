@@ -2,58 +2,81 @@ const inputName = document.getElementById("comment_name");
 const inputComment = document.getElementById("comment_box");
 const commentBtn = document.getElementById("comment_btn");
 const commentSection = document.querySelector(".comment-section");
+const sortSelection = document.getElementById("sort_selection");
 
 disableCommentButton();
 
-inputName.addEventListener("input", checkRequirements);
-inputComment.addEventListener("input", checkRequirements);
+const comments = Array.from(document.querySelectorAll(".comment-box")).map(
+	(comment) => {
+		const stampText = comment.querySelector(".stamp").textContent;
+
+		const [datePart, timePart] = stampText.split(", ");
+		const [day, month, year] = datePart.split("/");
+		const [hours, minutes, seconds] = timePart.split(":");
+
+		return {
+			  name: comment.querySelector(".commenter").textContent,
+			  text: comment.querySelector(".comments").textContent,
+			  time: new Date(year, month - 1, day, hours, minutes, seconds),
+			  element: comment,
+		};
+	}
+);
 
 function checkRequirements() {
-    const isNameValid = inputName.value.trim();
-    const isCommentValid = inputComment.value.trim(); 
-
-    commentBtn.disabled = !(isNameValid && isCommentValid);
-    commentBtn.classList.toggle("enabled", isNameValid && isCommentValid);
-    commentBtn.classList.toggle("disabled", !(isNameValid && isCommentValid));
+	const isNameValid = inputName.value.trim();
+	const isCommentValid = inputComment.value.trim();
+	commentBtn.disabled = !(isNameValid && isCommentValid);
+	commentBtn.classList.toggle("enabled", isNameValid && isCommentValid);
+	commentBtn.classList.toggle("disabled", !(isNameValid && isCommentValid));
 }
 
 function addComment() {
-    const commenter = inputName.value.trim();
-    const comment = inputComment.value.trim();
+	const now = new Date();
+	const commentObject = {
+		name: inputName.value.trim(),
+		text: inputComment.value.trim(),
+		time: now,
+		element: createCommentElement(now),
+	};
 
-    const commentContainer = createCommentElement(commenter, comment);
-
-    commentSection.appendChild(commentContainer);
-
-    clearInputFields();
-    disableCommentButton();
+	comments.push(commentObject);
+	commentSection.appendChild(commentObject.element);
+	clearInputFields();
+	disableCommentButton();
 }
 
-function createCommentElement(commenter, comment) {
-    const commentContainer = document.createElement("div");
-    commentContainer.classList.add("comment-box");
+function createCommentElement(timestamp) {
+	const commentElement = document.createElement("div");
+	commentElement.className = "comment-box";
 
-    const commentNameSpan = document.createElement("span");
-    commentNameSpan.classList.add("commenter");
-    commentNameSpan.textContent = commenter;
+	commentElement.innerHTML = `
+          <span class="commenter">${inputName.value.trim()}</span>
+          <p class="comments">${inputComment.value.trim()}</p>
+          <div class="stamp">${timestamp.toLocaleString()}</div>
+		  `;
 
-    const commentInput = document.createElement("p");
-    commentInput.classList.add("comments");
-    commentInput.textContent = comment;
-
-    commentContainer.appendChild(commentNameSpan);
-    commentContainer.appendChild(commentInput);
-
-    return commentContainer;
+	return commentElement;
 }
 
 function clearInputFields() {
-    inputName.value = "";
-    inputComment.value = "";
+	inputName.value = "";
+	inputComment.value = "";
 }
 
 function disableCommentButton() {
-    commentBtn.disabled = true;
-    commentBtn.classList.remove("enabled");
-    commentBtn.classList.add("disabled");
+	commentBtn.disabled = true;
+	commentBtn.classList.remove("enabled");
+	commentBtn.classList.add("disabled");
+}
+
+function sortComment() {
+	const sortOrder = sortSelection.value;
+	if (!sortOrder) return;
+
+	comments.sort((a, b) =>
+		sortOrder === "ascending" ? a.time - b.time : b.time - a.time);
+
+	commentSection.innerHTML = "";
+	comments.forEach((comment) => commentSection.appendChild(comment.element));
 }
