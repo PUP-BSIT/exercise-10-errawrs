@@ -34,15 +34,16 @@ function addComment() {
     textarea.value = "";
     checkValue();
 
-    if (sortOption.value === "ascending" || sortOption.value === "descending") {
-        sortComments();
+    if (sortOption.value === "ascending" || sortOption.value === "descending") 
+        {
+            sortComments();
     }
 }
 
 // Add timestamps to existing comments
 function addTimestampsToExistingComments() {
     const comments = commentSection.querySelectorAll(
-        ".comment-item:not(:has(.comment-timestamp))"
+          ".comment-item:not(:has(.comment-timestamp))"
     );
     const now = new Date();
 
