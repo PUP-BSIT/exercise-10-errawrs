@@ -6,9 +6,8 @@ const sortSelection = document.getElementById("sort_selection");
 
 disableCommentButton();
 
-const comments = Array.from(document.querySelectorAll(".comment-box")).map(
-	(comment) => initializeComments(comment)
-);
+const comments = Array.from(document.querySelectorAll(".comment-box"))
+	.map((comment) => initializeComments(comment));
 
 function initializeComments(comment) {
 	const stampText = comment.querySelector(".stamp").textContent;
