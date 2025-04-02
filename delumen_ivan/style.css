@@ -252,13 +252,12 @@ button {
 }
 
 .comment-item {
-    width: 200px;
+    width: 90%;
     background-color: yellow;
-    padding: 10px;
+    padding: 5px;
     border-radius: 15px;
     text-align: center;
     box-sizing: border-box;
-    margin-bottom: 10px;
 }
 
 .disabled {
