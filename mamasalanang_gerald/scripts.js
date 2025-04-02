@@ -15,7 +15,9 @@ sortSelect.addEventListener('change', sortComments);
 document.addEventListener('DOMContentLoaded', () => {
     validateForm();
     
-    document.querySelectorAll('.teammate-comment').forEach((comment, index) => {
+    document.querySelectorAll('.teammate-comment')
+           .forEach((comment, index) => {
+            
         let timestamp = Date.now();
         commentTimestamps.set(comment, timestamp);
         
