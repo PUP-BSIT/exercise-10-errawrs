@@ -64,8 +64,8 @@ function createCommentElement(commentText, author, timestamp) {
     commentBox.dataset.timestamp = timestamp;
     
     commentBox.innerHTML = `
-        <p class="comment-text">${commentText}</p>
-        <span>- ${author}</span>
+          <p class="comment-text">${commentText}</p>
+          <span>- ${author}</span>
     `;
     
     let timestampElement = document.createElement('div');
