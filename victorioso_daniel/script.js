@@ -7,21 +7,22 @@ const sortSelection = document.getElementById("sort_selection");
 disableCommentButton();
 
 const comments = Array.from(document.querySelectorAll(".comment-box")).map(
-	(comment) => {
-		const stampText = comment.querySelector(".stamp").textContent;
-
-		const [datePart, timePart] = stampText.split(", ");
-		const [day, month, year] = datePart.split("/");
-		const [hours, minutes, seconds] = timePart.split(":");
-
-		return {
-			  name: comment.querySelector(".commenter").textContent,
-			  text: comment.querySelector(".comments").textContent,
-			  time: new Date(year, month - 1, day, hours, minutes, seconds),
-			  element: comment,
-		};
-	}
+	(comment) => initializeComments(comment)
 );
+
+function initializeComments(comment) {
+	const stampText = comment.querySelector(".stamp").textContent;
+	const [datePart, timePart] = stampText.split(", ");
+	const [day, month, year] = datePart.split("/");
+	const [hours, minutes, seconds] = timePart.split(":");
+
+	return {
+		name: comment.querySelector(".commenter").textContent,
+		text: comment.querySelector(".comments").textContent,
+		time: new Date(year, month - 1, day, hours, minutes, seconds),
+		element: comment,
+	};
+}
 
 function checkRequirements() {
 	const isNameValid = inputName.value.trim();
@@ -75,7 +76,8 @@ function sortComment() {
 	if (!sortOrder) return;
 
 	comments.sort((a, b) =>
-		  sortOrder === "ascending" ? a.time - b.time : b.time - a.time);
+		sortOrder === "ascending" ? a.time - b.time : b.time - a.time
+	);
 
 	commentSection.innerHTML = "";
 	comments.forEach((comment) => commentSection.appendChild(comment.element));
