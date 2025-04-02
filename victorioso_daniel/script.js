@@ -53,8 +53,7 @@ function createCommentElement(timestamp) {
 	commentElement.innerHTML = `
         <span class="commenter">${inputName.value.trim()}</span>
         <p class="comments">${inputComment.value.trim()}</p>
-        <div class="stamp">${timestamp.toLocaleString()}</div>
-	`;
+        <div class="stamp">${timestamp.toLocaleString()}</div>`;
 
 	return commentElement;
 }
