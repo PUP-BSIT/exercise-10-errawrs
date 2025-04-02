@@ -26,8 +26,7 @@ function addComment() {
             <p>${textarea.value.trim()}</p>
             <strong>${input.value.trim()}</strong>
             <span class="comment-timestamp">${now.toLocaleString()}</span>
-        </div>
-    `;
+        </div>`;
 
     commentSection.insertAdjacentHTML("beforeend", commentHTML);
     input.value = "";
@@ -40,7 +39,6 @@ function addComment() {
     }
 }
 
-// Add timestamps to existing comments
 function addTimestampsToExistingComments() {
     const comments = commentSection.querySelectorAll(
           ".comment-item:not(:has(.comment-timestamp))"
@@ -83,5 +81,4 @@ function sortComments() {
     commentSection.appendChild(fragment);
 }
 
-// Initialize existing comments on load
 addTimestampsToExistingComments();
