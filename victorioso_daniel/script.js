@@ -51,10 +51,10 @@ function createCommentElement(timestamp) {
 	commentElement.className = "comment-box";
 
 	commentElement.innerHTML = `
-		<span class="commenter">${inputName.value.trim()}</span>
-		<p class="comments">${inputComment.value.trim()}</p>
-		<div class="stamp">${timestamp.toLocaleString()}</div>
-	`;
+          <span class="commenter">${inputName.value.trim()}</span>
+          <p class="comments">${inputComment.value.trim()}</p>
+          <div class="stamp">${timestamp.toLocaleString()}</div>
+		  `;
 
 	return commentElement;
 }
