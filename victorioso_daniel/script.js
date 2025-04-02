@@ -42,6 +42,7 @@ function addComment() {
 
 	comments.push(commentObject);
 	commentSection.appendChild(commentObject.element);
+	sortComment();
 	clearInputFields();
 	disableCommentButton();
 }
