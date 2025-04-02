@@ -6,7 +6,7 @@ let selectOrder = document.getElementById("select_order");
 
 function validateForm() {
     submitButton.disabled =
-        !nameInput.value.trim() || !commentTextarea.value.trim();
+            !nameInput.value.trim() || !commentTextarea.value.trim();
 }
 
 function handleSubmit() {
@@ -14,10 +14,10 @@ function handleSubmit() {
     let name = nameInput.value.trim();
     let comment = commentTextarea.value.trim();
     let timestamp = new Date().toLocaleString();
-    createCommentBox(name, comment, timestamp);
-    nameInput.value = "";
-    commentTextarea.value = "";
-    validateForm();
+            createCommentBox(name, comment, timestamp);
+            nameInput.value = "";
+            commentTextarea.value = "";
+            validateForm();
 }
 
 function createCommentBox(name, comment, timestamp) {
@@ -46,15 +46,16 @@ function sortComments() {
     let commentElements = Array.from(commentContainer.children);
     commentElements.sort((commentA, commentB) => {
         let timestampA = new Date(
-            commentA.querySelector(".timestamp").textContent.split(": ")[1]
+                commentA.querySelector(".timestamp").textContent.split(": ")[1]
         );
         let timestampB = new Date(
-            commentB.querySelector(".timestamp").textContent.split(": ")[1]
+                commentB.querySelector(".timestamp").textContent.split(": ")[1]
         );
         return selectOrder.value === "ascending"
-            ? timestampA - timestampB
-            : timestampB - timestampA;
+                ? timestampA - timestampB
+                : timestampB - timestampA;
     });
+    
     commentContainer.innerHTML = "";
     commentElements.forEach((comment) => commentContainer.append(comment));
 }
