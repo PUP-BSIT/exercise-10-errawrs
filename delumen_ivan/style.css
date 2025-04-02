@@ -176,6 +176,11 @@ body {
     width: 900px;
 }
 
+.sort-option {
+    display: block;
+    margin: auto;
+}
+
 .comment-section {
     background-color: darkblue;
     padding: 20px;
@@ -247,13 +252,12 @@ button {
 }
 
 .comment-item {
-    width: 200px;
+    width: 90%;
     background-color: yellow;
-    padding: 10px;
+    padding: 5px;
     border-radius: 15px;
     text-align: center;
     box-sizing: border-box;
-    margin-bottom: 10px;
 }
 
 .disabled {
@@ -264,6 +268,11 @@ button {
 .enable {
     background-color: yellow;
     cursor: pointer;
+}
+
+.comment-timestamp { 
+    display: flex;
+    flex-direction: column;
 }
 
 /* Mobile S */
