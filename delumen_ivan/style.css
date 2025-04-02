@@ -176,6 +176,11 @@ body {
     width: 900px;
 }
 
+.sort-option {
+    display: block;
+    margin: auto;
+}
+
 .comment-section {
     background-color: darkblue;
     padding: 20px;
