@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta charset="UTF-8" />
+        <meta charset="UTF-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <link href="./assets/playfair.ttf" rel="stylesheet"/>
         <link rel="stylesheet" href="./assets/fontawesome/css/all.min.css"/>
@@ -98,8 +98,8 @@
                 <div class="interest">
                     <h3>Playing Basketball</h3>
                     <p>
-                        Basketball keeps me active, improves 
-                        my teamwork skills, and is a great way 
+                        Basketball keeps me active, improves
+                        my teamwork skills, and is a great way
                         to relieve stress.
                     </p>
                 </div>
@@ -180,9 +180,9 @@
                         goal is to become a skilled software engineer, someone
                         who builds innovative solutions and contributes to the
                         digital world. I want to master multiple programming
-                        languages, work on real-world projects, 
-                        and continuously improve my problem-solving skills. 
-                        This career is notjust a job for me, it’s my dream, 
+                        languages, work on real-world projects,
+                        and continuously improve my problem-solving skills.
+                        This career is notjust a job for me, it’s my dream,
                         my path to success.
                     </p>
                 </div>
@@ -201,9 +201,9 @@
                 <div class="goal">
                     <h3>Create a Strong and Prosperous Family Life 👨‍👩‍👧</h3>
                     <p>
-                        I don’t just want to survive. I want to thrive. 
-                        When the time comes for me to build my own family, 
-                        I want to provide them with a life of stability, 
+                        I don’t just want to survive. I want to thrive.
+                        When the time comes for me to build my own family,
+                        I want to provide them with a life of stability,
                         love, and security. I want to be financially
                         independent,emotionally ready and capable of giving my
                         future children the opportunities I never had.
@@ -213,27 +213,45 @@
                 </div>
             </div>
         </div>
-        
-        <!---Comment form---->
+
+        <!-- Comment Form -->
         <div class="comment">
             <h2>Comment Form</h2>
             <div class="comment-form">
-                <form id="commentForm">
+                <form id="comment_form" onsubmit="return false;">
                     <label for="name">Name:</label>
-                    <input type="text" id="name" name="name"/>
+                    <input
+                        type="text"
+                        id="name"
+                        name="name"
+                        oninput="validateForm()"/>
                     <label for="comment">Comment:</label>
-                    <textarea id="comment" name="comment"></textarea>
-                    <button type="submit" id="submit_button" disabled>
+                    <textarea
+                        id="comment"
+                        name="comment"
+                        oninput="validateForm()"></textarea>
+                    <button
+                        type="button"
+                        id="submit_button"
+                        onclick="handleSubmit()"
+                        disabled>
                         Submit
                     </button>
                 </form>
             </div>
         </div>
 
-        <!---Comments of Group Member-->
         <div id="comment_section">
             <h2>Comment Section</h2>
-            <div class="comment-container" id="commentContainer">
+            <div class="sort-section">
+                <label for="select_order">Sort Order:</label>
+                <select id="select_order" onchange="sortComments()">
+                    <option value="">Select Sorting</option>
+                    <option value="ascending">Ascending</option>
+                    <option value="descending">Descending</option>
+                </select>
+            </div>
+            <div class="comment-container" id="comment_container">
                 <div class="comment-box">
                     <p>
                         Simone is a dedicated and inspiring groupmate. His
@@ -242,16 +260,18 @@
                         someone so driven and collaborative!
                     </p>
                     <p class="author">Daniel Victorioso</p>
+                    <p class="timestamp">Timestamp: 2023-10-01 12:00 PM</p>
                 </div>
 
                 <div class="comment-box">
                     <p>
                         Hardwork and dedication are Simone's defining
-                        qualities.His strong work ethic, creativity, and
-                        teamwork make him a reliable and valuable presence in
-                        any project.
+                        qualities. His strong work ethic, creativity,
+                        and teamwork make him a reliable and valuable presence
+                        in any project.
                     </p>
                     <p class="author">Gerald Mamasalanang</p>
+                    <p class="timestamp">Timestamp: 2023-10-01 1:00 PM</p>
                 </div>
 
                 <div class="comment-box">
@@ -262,6 +282,7 @@
                         around you.
                     </p>
                     <p class="author">Ivan Delumen</p>
+                    <p class="timestamp">Timestamp: 2023-10-01 2:00 PM</p>
                 </div>
             </div>
         </div>
@@ -276,10 +297,10 @@
                         <p>
                             Simone is a highly skilled and dedicated
                             professional who consistently exceeds expectations.
-                            His innovative approach and attention to detail 
-                            make him a standout in any project. 
-                            He brings passion and excellence 
-                            to everything he does.
+                            His innovative approach and attention to detail
+                            make him a standout in any project.
+                            He brings passion and excellence to everything
+                            he does.
                         </p>
                     </blockquote>
                     <p class="author">Daniel Victorioso</p>
@@ -289,11 +310,11 @@
                     <blockquote>
                         <span class="qoute-mark">❝</span>
                         <p>
-                            Simone is a hardworking and insightful classmate 
+                            Simone is a hardworking and insightful classmate
                             who brings creativity and dedication to everything 
-                            they do. Simone’s passion and determination set 
-                            them apart, ensuring a bright future ahead. 
-                            His strong work ethic, teamwork make him a 
+                            they do. Simone’s passion and determination
+                            set them apart, ensuring a bright future ahead.
+                            His strong work ethic, teamwork make him a
                             reliable and valuable presence in any project.
                         </p>
                     </blockquote>
@@ -307,15 +328,14 @@
                             Simone always take the time to explain complex
                             issues clearly, ensuring the whole team is on the
                             same page. Your dedication and hard work inspire
-                            everyone in team to give their best. 
-                            I’m grateful to you as a groupmate.
+                            everyone in team to give their best. I’m grateful
+                            to you as a groupmate.
                         </p>
                     </blockquote>
                     <p class="author">Ivan Delumen</p>
                 </div>
             </div>
         </div>
-
         <!--Gallery section-->
         <div id="gallery_section">
             <h2>Gallery</h2>
@@ -365,7 +385,7 @@
 
                 <div class="contact-form">
                     <h2>Get In Touch</h2>
-                    <form action="#" method="post">
+                    <form>
                         <input
                             type="text"
                             name="name"
@@ -380,7 +400,7 @@
                             type="tel"
                             name="phone"
                             placeholder="Phone number"/>
-                        <textarea
+                        <textarea 
                             name="message" 
                             placeholder="Message" 
                             required>
