@@ -6,11 +6,11 @@ let sortOption = document.querySelector(".sort-option");
 
 button.classList.add("disabled");
 
-button.addEventListener("click", addComment);
 input.addEventListener("input", checkValue);
 textarea.addEventListener("input", checkValue);
 sortOption.addEventListener("change", sortComments);
 
+// Function to check if both fields are filled to enable the button
 function checkValue() {
     const hasValidInput = input.value.trim() && textarea.value.trim();
 
@@ -19,45 +19,78 @@ function checkValue() {
     button.classList.toggle("enable", hasValidInput);
 }
 
+// Function to add a new comment
 function addComment() {
-    let currentDate = new Date();
-    let formattedDate = currentDate.toISOString();
+    const dateNow = new Date();
+    const formattedDate = dateNow.toISOString();
 
-    let commentContainer = document.createElement("div");
+    const commentContainer = document.createElement("div");
     commentContainer.classList.add("comment-item");
-    commentContainer.dataset.time = formattedDate;
+    commentContainer.dataset.timestamp = formattedDate; // Store timestamp in data attribute
 
-    let commentText = document.createElement("p");
-    commentText.innerHTML = textarea.value;
+    const commentText = document.createElement("p");
+    commentText.textContent = textarea.value;
 
-    let commentName = document.createElement("strong");
-    commentName.innerHTML = input.value;
+    const commentName = document.createElement("strong");
+    commentName.textContent = input.value;
+
+    const timeStamp = document.createElement("span");
+    timeStamp.classList.add("comment-timestamp");
+    timeStamp.textContent = dateNow.toLocaleString();
 
     commentSection.append(commentContainer);
     commentContainer.append(commentText);
     commentContainer.append(commentName);
+    commentContainer.append(timeStamp);
 
     input.value = "";
     textarea.value = "";
 
     checkValue();
+
+    // After adding a new comment, sort all comments
+    sortComments();
 }
 
+// Add a timestamp to existing comments when the page loads
+function addTimestampsToExistingComments() {
+    const comments = commentSection.querySelectorAll(".comment-item");
+
+    comments.forEach((comment, index) => {
+        // Generate a unique timestamp for each comment
+        const dateNow = new Date();
+        dateNow.setMinutes(dateNow.getMinutes() - index * 5); // Make each timestamp different
+
+        const formattedDate = dateNow.toLocaleString(); // Convert date to a human-readable format
+
+        const timeStamp = document.createElement("span");
+        timeStamp.classList.add("comment-timestamp");
+        timeStamp.textContent = formattedDate; // Set the timestamp
+
+        comment.append(timeStamp);
+    });
+}
+
+// Function to sort comments based on timestamp (ascending/descending)
 function sortComments() {
-    //convert .commen-item to array queryselectorAll
-    let comments = Array.from(document.querySelectorAll(".comment-item"));
-    let selectedSortOrder = sortOption.value;
+    const comments = Array.from(
+        commentSection.querySelectorAll(".comment-item")
+    );
+    const sortOrder = sortOption.value;
 
     comments.sort((a, b) => {
-        let dateA = new Date(a.dataset.time);
-        let dateB = new Date(b.dataset.time);
+        const timestampA = new Date(a.dataset.timestamp);
+        const timestampB = new Date(b.dataset.timestamp);
 
-        if (selectedSortOrder === "descending") {
-            return dateB - dateA;
-        } else {
-            return dateA - dateB;
+        if (sortOrder === "ascending") {
+            return timestampA - timestampB;
+        } else if (sortOrder === "descending") {
+            return timestampB - timestampA;
         }
+        return 0;
     });
 
+    // Re-render the sorted comments
+    commentSection.innerHTML = "";
     comments.forEach((comment) => commentSection.append(comment));
 }

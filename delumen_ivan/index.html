@@ -119,6 +119,7 @@
                 </div>
                 <h2>Comments</h2>
                     <select class="sort-option">
+                        <option value="sort">--Select Sorting--</option>
                         <option value="ascending">Ascending</option>
                         <option value="descending">Descending</option>
                     </select>
@@ -162,7 +163,8 @@
                         <textarea
                               placeholder="Your Comment"
                               required ></textarea>
-                        <button type="button" class="submit-button">
+                        <button type="button" class="submit-button"
+                              onclick="addComment()">
                             Comment
                         </button>
                     </form>
