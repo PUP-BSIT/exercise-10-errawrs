@@ -75,7 +75,7 @@ function sortComment() {
 	if (!sortOrder) return;
 
 	comments.sort((a, b) =>
-		sortOrder === "ascending" ? a.time - b.time : b.time - a.time);
+		  sortOrder === "ascending" ? a.time - b.time : b.time - a.time);
 
 	commentSection.innerHTML = "";
 	comments.forEach((comment) => commentSection.appendChild(comment.element));
