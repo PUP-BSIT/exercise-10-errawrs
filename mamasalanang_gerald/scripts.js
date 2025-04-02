@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
     validateForm();
     
     document.querySelectorAll('.teammate-comment')
-           .forEach((comment, index) => {
+          .forEach((comment, index) => {
             
         let timestamp = Date.now();
         commentTimestamps.set(comment, timestamp);
