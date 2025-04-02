@@ -173,6 +173,7 @@
                             not just reaching for success you’re shaping it
                             with every decision you make.
                         </p>
+                        <div class="stamp">25/03/2025, 13:21:06</div>
                     </div>
                     <div class="comment-box">
                         <span class="commenter">Simone Reyes</span>
@@ -182,6 +183,7 @@
                             step toward success. Let’s give it our
                             best—together, we’ve got this!
                         </p>
+                        <div class="stamp">29/03/2025, 11:43:10</div>
                     </div>
                     <div class="comment-box">
                         <span class="commenter">Gerald Mamasalanang</span>
@@ -192,6 +194,7 @@
                             achieve them. Keep pushing forward, and never stop
                             reaching for the stars.
                         </p>
+                        <div class="stamp">31/03/2025, 18:11:45</div>
                     </div>
                 </div>
                 <div class="comment-form">
@@ -201,20 +204,31 @@
                             <input
                                   type="text"
                                   id="comment_name"
-                                  name="comment_name">
+                                  name="comment_name"
+                                  oninput="checkRequirements()">
                         </div>
                         <div class="form-group">
                             <label for="comment_box">Comment</label>
                             <textarea
                                   name="comment_box"
-                                  id="comment_box"></textarea>
+                                  id="comment_box"
+                                  oninput="checkRequirements()"></textarea>
                         </div>
                         <button
                               type="button"
                               id="comment_btn"
+                              class="button"
                               onclick="addComment()">
                             Comment
                         </button>
+                        <select
+                              name="sort"
+                              id="sort_selection"
+                              onchange="sortComment()">
+                            <option value="">Sort Comments</option>
+                            <option value="ascending">Ascending</option>
+                            <option value="descending">Descending</option>
+                        </select>
                     </form>
                 </div>
             </div>
