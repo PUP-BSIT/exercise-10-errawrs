@@ -1,8 +1,8 @@
-const input = document.querySelector(".name");
-const textarea = document.querySelector("textarea");
-const button = document.querySelector(".submit-button");
-const commentSection = document.querySelector(".teammate-comment");
-const sortOption = document.querySelector(".sort-option");
+let input = document.querySelector(".name");
+let textarea = document.querySelector("textarea");
+let button = document.querySelector(".submit-button");
+let commentSection = document.querySelector(".teammate-comment");
+let sortOption = document.querySelector(".sort-option");
 
 button.disabled = true;
 button.classList.add("disabled");
